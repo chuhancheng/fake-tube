@@ -14,7 +14,7 @@ let mainWindow;
 
 function createWindow () {
     // Hide top menu
-    Menu.setApplicationMenu(null)
+    // Menu.setApplicationMenu(null)
   // 建立 browser window
   mainWindow = new BrowserWindow({width: 800, height: 600});
 

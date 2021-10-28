@@ -5,35 +5,41 @@ var config = {
   entry: {
     mainWindow: ['./app/mainWindow.jsx']
   },
-output: {
-  path: './app/built',
-  filename: '[name].js'
-},
-module: {
- loaders: [
-    {
-      test: /\.jsx$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-   query: {
-     presets: ['react', 'es2015'],
-   }
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-   query: {
-     presets: ['es2015'],
-   }
-    }
- ]
-},
- plugins: [
-   new webpack.ExternalsPlugin('commonjs',['fs']),
-   new webpack.IgnorePlugin(/vertx/)
- ]
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/app/built',
+  },
+  externals: {
+    fs: 'commonjs fs',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/react', '@babel/preset-env'],
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          }
+        }
+      }
+    ]
+  },
+  target: 'electron-renderer',
+  plugins: [
+    new webpack.IgnorePlugin({ resourceRegExp: /vertx/ })
+  ]
 }
 
-config.target = webpackTargetElectronRenderer(config);
 module.exports = config;
