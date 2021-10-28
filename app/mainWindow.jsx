@@ -1,37 +1,53 @@
 'use strict';
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import {
     HashRouter,
-    Route
+    Route,
+    Switch,
+    useHistory
 } from "react-router-dom";
 
+const Home = () => {
+    const history = useHistory();
+
+    const changeRoute = () => {
+        history.push('/firstPage')
+    }
+
+    return (
+        <>
+            Hello world!!
+            <button type="button" onClick={changeRoute}>change page</button>
+        </>
+    )
+}
+
+const FirstPage = () => {
+    const history = useHistory();
+
+    const changeRoute = () => {
+        history.push('/')
+    }
+
+    return (
+        <>
+            FirstPage!!
+            <button type="button" onClick={changeRoute}>change page</button>
+        </>
+    )
+}
+
 class MainWindow extends React.Component {
-
-    state = {
-        message: ''
-    }
-
-    constructor(props) {
-        super(props);
-    }
-
-    handleTextChange = (event) => {
-        this.setState({
-            message: event.target.value
-        });
-    }
-
     render() {
         return (
             <div>
-                Hello world!!
-                <hr />
-                <input type="text" onChange={this.handleTextChange} />
-                <p><strong>你輸入的是</strong></p>
-                <p>
-                    <span>{this.state.message}</span>
-                </p>
+                <HashRouter>
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/firstPage" component={FirstPage} />
+                    </Switch>
+                </HashRouter>
             </div>
         );
     }
