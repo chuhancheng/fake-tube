@@ -1,6 +1,9 @@
 'use strict';
 
 const electron = require('electron');
+
+//const {Menu} = require('electron')
+const Menu = electron.Menu
 // app: 控制應用程式生命週期的模組
 const app = electron.app;
 // BrowserWindow: 建立系統原生視窗 (native window) 的模組
@@ -10,6 +13,8 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow () {
+    // Hide top menu
+    Menu.setApplicationMenu(null)
   // 建立 browser window
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
@@ -17,7 +22,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/app/mainWindow.html');
 
   // 開啟開發者工具
-  mainWindow.webContents.openDevTools();
+//   mainWindow.webContents.openDevTools();
 
   // 當 browser window 被關閉時，會送出 'closed' 訊號，並執行相關的 callback
   mainWindow.on('closed', function() {
