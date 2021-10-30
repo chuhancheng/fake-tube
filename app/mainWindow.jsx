@@ -7,7 +7,7 @@ import {
     Switch,
     useHistory
 } from "react-router-dom";
-import './style/styles.css';
+import './style/styles.scss';
 
 const Home = () => {
     const history = useHistory();
@@ -19,7 +19,7 @@ const Home = () => {
     return (
         <>
             <div className="flex">
-                <div className="red">2222</div>
+                <div className="text-red-500">2222</div>
                 <div>333</div>
             </div>
             <button type="button" onClick={changeRoute}>change page</button>

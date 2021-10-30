@@ -36,14 +36,15 @@ var config = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         exclude: /(node_modules)/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
     ]
   },
   target: 'electron-renderer',
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.IgnorePlugin({ resourceRegExp: /vertx/ }),
   ]
 }
