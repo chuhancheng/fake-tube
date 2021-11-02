@@ -13,6 +13,9 @@ var config = {
   externals: {
     fs: 'commonjs fs',
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
